@@ -98,7 +98,8 @@ export function PromptCard({ prompt, onDelete }: PromptCardProps) {
   return (
     <Card className="group h-full bg-gradient-card shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 overflow-hidden">
       <CardContent className="p-0">
-        <div className="aspect-square relative overflow-hidden">
+        {/* <div className="aspect-square relative overflow-hidden"> */}
+        <div className="aspect-[3.5/5] relative overflow-hidden bg-gray-100 rounded-lg">
           {imageError ? (
             <div className="w-full h-full bg-muted flex items-center justify-center">
               <div className="text-center text-muted-foreground">
@@ -108,7 +109,7 @@ export function PromptCard({ prompt, onDelete }: PromptCardProps) {
                 <p className="text-sm">Image unavailable</p>
               </div>
             </div>
-          ) : (
+              ) : (
             <img
               src={prompt.image}
               alt={`AI generated image for: ${prompt.prompt.slice(0, 50)}...`}

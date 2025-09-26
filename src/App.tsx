@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link, useNavigate } from "react-router-dom";
 import { AppSidebar } from "@/components/AppSidebar";
 import UploadPage from "./pages/AdminUpload";
 import Index from "./pages/Index";
@@ -11,8 +11,28 @@ import Category from "./pages/Category";
 import NotFound from "./pages/NotFound";
 import { AuthButtons } from "./components/AuthButtons";
 import Login from './pages/Login';
+import { useEffect } from "react";
 
 const queryClient = new QueryClient();
+
+// 🔐 Hidden Login Shortcut Component
+function HiddenLoginShortcut() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === "l") {
+        navigate("/login");
+      }
+    };
+
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [navigate]);
+
+  return null;
+}
+
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -50,6 +70,7 @@ const App = () => (
             </main>
           </div>
           <AuthButtons/>
+          <HiddenLoginShortcut />
         </SidebarProvider>
       </BrowserRouter>
     </TooltipProvider>

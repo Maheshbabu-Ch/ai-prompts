@@ -150,19 +150,26 @@ interface PromptGridProps {
 export function PromptGrid({ category }: PromptGridProps) {
   const [loading, setLoading] = useState(true);
   const [prompts, setPrompts] = useState<Prompt[]>([]);
-  const [displayCount, setDisplayCount] = useState(12);
+  const [displayCount, setDisplayCount] = useState(15);
 
-  const [sortBy, setSortBy] = useState<'prompt' | 'created_at'>('created_at');
+  // const [sortBy, setSortBy] = useState<'prompt' | 'created_at'>('created_at');
+  const [sortBy, setSortBy] = useState<string>('');
   const [ascending, setAscending] = useState(false);
 
   useEffect(() => {
     const fetchPrompts = async () => {
       setLoading(true);
 
-      let query = supabase.from('prompts').select('*').order(sortBy, { ascending });
+      let query = supabase.from('prompts').select('*');
 
+      // let query = supabase.from('prompts').select('*').order(sortBy, { ascending });
+      if (sortBy) {
+         query = query.order(sortBy, { ascending });
+      }
       if (category.toLowerCase() !== 'all') {
         query = query.ilike('category', category);
+        setSortBy('created_at');
+        query = query.order(sortBy, { ascending });
       }
 
       const { data, error } = await query;
@@ -171,7 +178,12 @@ export function PromptGrid({ category }: PromptGridProps) {
         console.error('Error fetching prompts:', error.message);
         setPrompts([]);
       } else {
-        setPrompts(data || []);
+        let fetched = data || [];
+        if (!sortBy) {
+        fetched = shuffleArray(fetched);
+      }
+
+        setPrompts(fetched);
       }
 
       setLoading(false);
@@ -181,14 +193,24 @@ export function PromptGrid({ category }: PromptGridProps) {
   }, [category, sortBy, ascending]);
 
   useEffect(() => {
-    setDisplayCount(12);
+    setDisplayCount(15);
   }, [category, sortBy, ascending]);
+
+  function shuffleArray<T>(array: T[]): T[] {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
+
 
   const displayedPrompts = useMemo(() => prompts.slice(0, displayCount), [prompts, displayCount]);
 
   const hasMore = displayCount < prompts.length;
 
-  const handleLoadMore = () => setDisplayCount((prev) => prev + 12);
+  const handleLoadMore = () => setDisplayCount((prev) => prev + 15);
 
   const getCategoryTitle = (cat: string) =>
     cat === 'all' ? 'All Prompts' : `${cat.charAt(0).toUpperCase() + cat.slice(1)} Prompts`;
