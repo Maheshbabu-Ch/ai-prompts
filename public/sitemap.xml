@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Homepage -->
+  <url>
+    <loc>https://aipromptvault.vercel.app/</loc>
+    <lastmod>2025-09-30</lastmod>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Category Pages -->
+  <url>
+    <loc>https://aipromptvault.vercel.app/category/Women</loc>
+    <lastmod>2025-09-30</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aipromptvault.vercel.app/category/Men</loc>
+    <lastmod>2025-09-30</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aipromptvault.vercel.app/category/Kids</loc>
+    <lastmod>2025-09-30</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aipromptvault.vercel.app/category/Anime</loc>
+    <lastmod>2025-09-30</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aipromptvault.vercel.app/category/Couple</loc>
+    <lastmod>2025-09-30</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aipromptvault.vercel.app/category/Fantasy</loc>
+    <lastmod>2025-09-30</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aipromptvault.vercel.app/category/Nature</loc>
+    <lastmod>2025-09-30</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aipromptvault.vercel.app/category/Abstract</loc>
+    <lastmod>2025-09-30</lastmod>
+    <priority>0.8</priority>
+  </url>
+</urlset>
